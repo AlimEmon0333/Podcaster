@@ -12,10 +12,10 @@ const PodcastCard = ({ item }) => {
       e.preventDefault();
       dispatch(playerActions.setDiv());
       dispatch(
-        playerActions.changeImage(`https://podcaster-smoky-theta.vercel.app/uploads/${item.frontImage}`)
+        playerActions.changeImage(`https://podcaster-smoky-theta.vercel.app/uploads//${item.frontImage}`)
       );
       dispatch(
-        playerActions.changeSong(`https://podcaster-smoky-theta.vercel.app/uploads/${item.audioFile}`)
+        playerActions.changeSong(`https://podcaster-smoky-theta.vercel.app/uploads//${item.audioFile}`)
       );
     }
   };

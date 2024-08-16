@@ -16,10 +16,7 @@ router.post("/add-podcast", authMiddleware, upload, async (req, res) => {
       return res.status(400).json({ message: "All Fields are Required" });
     }
 
-    // Replace backslashes with forward slashes
-    frontImage = frontImage.replace(/\\/g, "/");
-    audioFile = audioFile.replace(/\\/g, "/");
-
+   
     const { user } = req;
     const cat = await Category.findOne({ categoryName: category });
     if (!cat) {

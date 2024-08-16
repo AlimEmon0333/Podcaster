@@ -47,37 +47,49 @@ const InputPodcast = () => {
     setInputValues({ ...InputValues, [name]: value });
   };
   const handleSubmitPodcast = async () => {
-    const data = new FormData();
-    data.append("title", InputValues.title);
-    data.append("description", InputValues.description);
-    data.append("category", InputValues.category);
-    data.append("frontImage", FrontImage);
-    data.append("audioFile", AudioFile);
-    try {
-      setloading(true);
-      const res = await axios.post(
-        "https://podcaster-smoky-theta.vercel.app/api/v1/add-podcast",
-        data,
-        {
-          withCredentials: true,
-        }
-      );
+  const data = new FormData();
+  data.append("title", InputValues.title);
+  data.append("description", InputValues.description);
+  data.append("category", InputValues.category);
+  data.append("frontImage", FrontImage);
+  data.append("audioFile", AudioFile);
+
+  try {
+    setloading(true);
+    const res = await axios.post(
+      "https://podcaster-smoky-theta.vercel.app/api/v1/add-podcast",
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+
+    // Check if res and res.data exist before accessing res.data.message
+    if (res && res.data) {
       toast.success(res.data.message);
       navigate("/profile");
-      setloading(false);
-    } catch (error) {
-      setloading(false);
-      toast.error(error.response.data.message);
-    } finally {
-      setInputValues({
-        title: "",
-        description: "",
-        category: "",
-      });
-      setFrontImage(null);
-      setAudioFile(null);
+    } else {
+      toast.error("Unexpected response format from the server.");
     }
-  };
+
+  } catch (error) {
+    setloading(false);
+    // Detailed error handling
+    const errorMessage = error.response?.data?.message || "An error occurred while submitting the podcast.";
+    toast.error(errorMessage);
+    console.log(error);
+  } finally {
+    setloading(false);
+    setInputValues({
+      title: "",
+      description: "",
+      category: "",
+    });
+    setFrontImage(null);
+    setAudioFile(null);
+  }
+};
+
   return (
     <div className="px-4 mt-1 lg:px-12 border-t border-zinc-600 ">
       <ToastContainer position="bottom-right" />
