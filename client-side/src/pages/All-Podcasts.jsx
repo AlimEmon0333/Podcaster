@@ -8,7 +8,7 @@ const AllPodcasts = () => {
     const allPodcasts = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:2000/api/v1//get-podcasts"
+          "https://podcaster-smoky-theta.vercel.app/api/v1/get-podcasts"
         );
         setPodcasts([...response.data.data]);
       } catch (error) {

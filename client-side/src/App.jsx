@@ -21,7 +21,7 @@ const App = () => {
     const fetchCookie = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:2000/api/v1/check-cookie",
+          "https://podcaster-smoky-theta.vercel.app/api/v1/check-cookie",
           { withCredentials: true }
         );
         if (res.data.message == true) {

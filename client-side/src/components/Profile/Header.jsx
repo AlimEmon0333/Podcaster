@@ -12,7 +12,7 @@ const Header = () => {
     const fetchUserDetails = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:2000/api/v1/user-details",
+          "https://podcaster-smoky-theta.vercel.app/api/v1/user-details",
           { withCredentials: true }
         );
         setuserData(res.data.user);
@@ -24,7 +24,7 @@ const Header = () => {
   }, []);
 const LogoutUser = async () => {
   try {
-    const res = await axios.post("http://localhost:2000/api/v1/log-out", null, {
+    const res = await axios.post("https://podcaster-smoky-theta.vercel.app/api/v1/log-out", null, {
       withCredentials: true,
     });
     dispatch(authActions.logout());

@@ -10,7 +10,7 @@ const UserPodcasts = () => {
     const allPodcasts = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:2000/api/v1/get-user-podcasts"
+          "https://podcaster-smoky-theta.vercel.app/api/v1/get-user-podcasts"
           ,{withCredentials:true}
         );
         console.log(response);

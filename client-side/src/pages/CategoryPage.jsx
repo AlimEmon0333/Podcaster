@@ -10,7 +10,7 @@ const CategoryPage = () => {
     const allPodcasts = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:2000/api/v1/category/${cat}`,
+          `https://podcaster-smoky-theta.vercel.app/api/v1/category/${cat}`,
           { withCredentials: true }
         );
         setPodcasts([...response.data.data]);

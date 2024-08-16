@@ -5,22 +5,30 @@ const Podcast = require("../models/podcasts.js");
 const User = require("../models/user.js");
 const router = require("express").Router();
 
-// add-podacast
+// add-podcast
 router.post("/add-podcast", authMiddleware, upload, async (req, res) => {
   try {
     const { title, description, category } = req.body;
-    const frontImage = req.files["frontImage"][0].path;
-    const audioFile = req.files["audioFile"][0].path;
+    let frontImage = req.files["frontImage"][0].path;
+    let audioFile = req.files["audioFile"][0].path;
+
     if (!title || !description || !category || !frontImage || !audioFile) {
-      res.status(400).json({ message: "All Fields are Required" });
+      return res.status(400).json({ message: "All Fields are Required" });
     }
+
+    // Replace backslashes with forward slashes
+    frontImage = frontImage.replace(/\\/g, "/");
+    audioFile = audioFile.replace(/\\/g, "/");
+
     const { user } = req;
     const cat = await Category.findOne({ categoryName: category });
     if (!cat) {
-      res.status(404).json({ message: "Category Not Found" });
+      return res.status(404).json({ message: "Category Not Found" });
     }
+
     const userId = user._id;
     const catId = cat._id;
+
     const newPodcast = new Podcast({
       title,
       description,
@@ -29,16 +37,20 @@ router.post("/add-podcast", authMiddleware, upload, async (req, res) => {
       category: catId,
       user: userId,
     });
+
     await newPodcast.save();
+
     await Category.findByIdAndUpdate(catId, {
       $push: { podcasts: newPodcast._id },
     });
+
     await User.findByIdAndUpdate(userId, {
       $push: { podcasts: newPodcast._id },
     });
-    res.status(200).json({ message: "Podast Added Successfully" });
+
+    return res.status(200).json({ message: "Podcast Added Successfully" });
   } catch (error) {
-    res.status(500).json({ error: error, message: "Failed To Add Podcast" });
+    return res.status(500).json({ error: error, message: "Failed To Add Podcast" });
   }
 });
 

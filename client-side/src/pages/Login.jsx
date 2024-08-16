@@ -25,7 +25,7 @@ const Login = () => {
     try {
       setloading(true);
       const res = await axios.post(
-        "http://localhost:2000/api/v1/sign-in/",
+        "https://podcaster-smoky-theta.vercel.app/api/v1/sign-in/",
         values,
         { withCredentials: true }
       );

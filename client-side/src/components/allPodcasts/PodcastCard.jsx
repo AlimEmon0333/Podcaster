@@ -12,10 +12,10 @@ const PodcastCard = ({ item }) => {
       e.preventDefault();
       dispatch(playerActions.setDiv());
       dispatch(
-        playerActions.changeImage(`http://localhost:2000/${item.frontImage}`)
+        playerActions.changeImage(`https://podcaster-smoky-theta.vercel.app/uploads/${item.frontImage}`)
       );
       dispatch(
-        playerActions.changeSong(`http://localhost:2000/${item.audioFile}`)
+        playerActions.changeSong(`https://podcaster-smoky-theta.vercel.app/uploads/${item.audioFile}`)
       );
     }
   };
@@ -27,7 +27,7 @@ const PodcastCard = ({ item }) => {
       >
         <div>
           <img
-            src={`http://localhost:2000/${item.frontImage}`}
+            src={`https://podcaster-smoky-theta.vercel.app/${item.frontImage}`}
             className="object-contain rounded-xl"
             alt="thumbnail"
           />
