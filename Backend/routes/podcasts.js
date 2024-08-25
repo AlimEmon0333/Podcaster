@@ -16,7 +16,6 @@ router.post("/add-podcast", authMiddleware, upload, async (req, res) => {
       return res.status(400).json({ message: "All Fields are Required" });
     }
 
-   
     const { user } = req;
     const cat = await Category.findOne({ categoryName: category });
     if (!cat) {

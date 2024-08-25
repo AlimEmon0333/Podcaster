@@ -14,7 +14,7 @@ require("dotenv").config();
 require("./connection/mongo_connection.js");
 app.use(express.json());
 app.use(cookieParser());
-app.use("/uploads", express.static("uploads"));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // routes
 app.use("/api/v1", userApi);
 app.use("/api/v1", catApi);
