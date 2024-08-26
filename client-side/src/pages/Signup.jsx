@@ -24,9 +24,10 @@ const Signup = () => {
     try {
       setloading(true);
       const res = await axios.post(
-        "https://podcaster-smoky-theta.vercel.app/api/v1/sign-up/",
+        "http://localhost:2000/api/v1/sign-up/",
         values
       );
+      console.log(res);
       setloading(false);
       navigate("/login")
     } catch (error) {

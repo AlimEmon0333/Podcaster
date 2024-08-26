@@ -57,7 +57,7 @@ const InputPodcast = () => {
   try {
     setloading(true);
     const res = await axios.post(
-      "https://podcaster-smoky-theta.vercel.app/api/v1/add-podcast",
+      "http://localhost:2000/api/v1/add-podcast",
       data,
       {
         withCredentials: true,

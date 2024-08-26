@@ -11,7 +11,7 @@ const PodcastDescription = () => {
     const allPodcasts = async () => {
       try {
         const response = await axios.get(
-          `https://podcaster-smoky-theta.vercel.app/api/v1/get-podcast/${id}`,
+          `http://localhost:2000/api/v1/get-podcast/${id}`,
           { withCredentials: true }
         );
         setPodcasts(response.data.data);
@@ -27,7 +27,7 @@ const PodcastDescription = () => {
         <>
           <div className="w-2/6 flex items-center justify-center ">
             <img
-              src={`https://podcaster-smoky-theta.vercel.app/${Podcasts.frontImage}`}
+              src={`http://localhost:2000/${Podcasts.frontImage}`}
               className="rounded w-full h-[50vh] object-cover"
               alt="thumbnail"
             />
